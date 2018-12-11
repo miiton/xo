@@ -8,6 +8,8 @@ import (
 	"github.com/knq/snaker"
 
 	"github.com/xo/xo/models"
+
+	"github.com/iancoleman/strcase"
 )
 
 // NewTemplateFuncs returns a set of template funcs bound to the supplied args.
@@ -33,6 +35,7 @@ func (a *ArgType) NewTemplateFuncs() template.FuncMap {
 		"hascolumn":          a.hascolumn,
 		"hasfield":           a.hasfield,
 		"getstartcount":      a.getstartcount,
+		"lowercamel":         strcase.ToLowerCamel,
 	}
 }
 

@@ -35,7 +35,8 @@ func (a *ArgType) NewTemplateFuncs() template.FuncMap {
 		"hascolumn":          a.hascolumn,
 		"hasfield":           a.hasfield,
 		"getstartcount":      a.getstartcount,
-		"lowercamel":         strcase.ToLowerCamel,
+		"lowercamel":         a.lowercamel,
+		"gqltype":            a.gqltype,
 	}
 }
 
@@ -633,6 +634,46 @@ func (a *ArgType) hasfield(fields []*Field, name string) bool {
 	}
 
 	return false
+}
+
+// lowercamel returns a lowerCamel cased string
+func (a *ArgType) lowercamel(colname string) string {
+	return strcase.ToLowerCamel(colname)
+}
+
+// gqltype returns a graphql-go type Int,Float,String,Boolean,ID,DateTime
+func (a *ArgType) gqltype(typ string) string {
+	switch typ {
+	case "uint":
+		return "graphql.Int"
+	case "uint8":
+		return "graphql.Int"
+	case "uint16":
+		return "graphql.Int"
+	case "uint32":
+		return "graphql.Int"
+	case "uint64":
+		return "graphql.Int"
+	case "int":
+		return "graphql.Int"
+	case "int8":
+		return "graphql.Int"
+	case "int16":
+		return "graphql.Int"
+	case "int32":
+		return "graphql.Int"
+	case "int64":
+		return "graphql.Int"
+	case "float32":
+		return "graphql.Float"
+	case "float64":
+		return "graphql.Float"
+	case "string":
+		return "graphql.String"
+	case "bool":
+		return "graphql.Boolean"
+	}
+	return ""
 }
 
 // getstartcount returns a starting count for numbering columsn in queries

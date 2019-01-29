@@ -9,6 +9,7 @@ import (
 
 	"github.com/xo/xo/models"
 
+	"github.com/gedex/inflector"
 	"github.com/iancoleman/strcase"
 )
 
@@ -37,6 +38,7 @@ func (a *ArgType) NewTemplateFuncs() template.FuncMap {
 		"getstartcount":      a.getstartcount,
 		"lowercamel":         a.lowercamel,
 		"gqltype":            a.gqltype,
+		"pluralize":          a.pluralize,
 	}
 }
 
@@ -639,6 +641,11 @@ func (a *ArgType) hasfield(fields []*Field, name string) bool {
 // lowercamel returns a lowerCamel cased string
 func (a *ArgType) lowercamel(colname string) string {
 	return strcase.ToLowerCamel(colname)
+}
+
+// lowercamel returns a lowerCamel cased string
+func (a *ArgType) pluralize(colname string) string {
+	return inflector.Pluralize(colname)
 }
 
 // gqltype returns a graphql-go type Int,Float,String,Boolean,ID,DateTime
